@@ -2,18 +2,13 @@
 i=0
 while true
 do  
-    while true
+    b=$(./waitForButtonPress.sh)
+    echo $b
+    while [ $b -eq 0 ]
     do
-        b=$(gpio read 5)
+        sleep 0.1
+        b=$(./waitForButtonPress.sh)
         if [ $b -eq 0 ]
-        then
-            break
-        fi
-    done
-    while true 
-    do
-        b=$(gpio read 5)
-        if [ $b -eq 1 ]
         then
             let i=i+1
             ./setbits.sh $i
